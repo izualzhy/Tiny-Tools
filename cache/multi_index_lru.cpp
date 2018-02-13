@@ -1,3 +1,4 @@
+#include <sys/time.h>
 #include <string>
 #include <iostream>
 
@@ -5,7 +6,7 @@
 #include "boost/multi_index/hashed_index.hpp"
 #include "boost/multi_index/sequenced_index.hpp"
 #include "boost/multi_index/member.hpp"
-#include "gtest/gtest.h"
+// #include "gtest/gtest.h"
 
 template <class T, class V>
 class LRUCache {
@@ -73,44 +74,73 @@ private:
     int _capacity;
 };//LRUCache
 
-TEST(lru, en_wiki) {
-    LRUCache<std::string, std::string> lru_cache(4);
-    lru_cache.put("A", "Amanda");
-    lru_cache.put("B", "Bruce");
-    lru_cache.put("C", "Chris");
-    lru_cache.put("D", "Demon");
+// TEST(lru, en_wiki) {
+    // LRUCache<std::string, std::string> lru_cache(4);
+    // lru_cache.put("A", "Amanda");
+    // lru_cache.put("B", "Bruce");
+    // lru_cache.put("C", "Chris");
+    // lru_cache.put("D", "Demon");
 
-    std::string expected_str("D\tDemon\nC\tChris\nB\tBruce\nA\tAmanda\n");
-    EXPECT_EQ(lru_cache.dump(), expected_str);
+    // std::string expected_str("D\tDemon\nC\tChris\nB\tBruce\nA\tAmanda\n");
+    // EXPECT_EQ(lru_cache.dump(), expected_str);
 
-    lru_cache.put("E", "Elina");
-    expected_str.assign("E\tElina\nD\tDemon\nC\tChris\nB\tBruce\n");
-    EXPECT_EQ(lru_cache.dump(), expected_str);
+    // lru_cache.put("E", "Elina");
+    // expected_str.assign("E\tElina\nD\tDemon\nC\tChris\nB\tBruce\n");
+    // EXPECT_EQ(lru_cache.dump(), expected_str);
 
-    lru_cache.put("D", "Darel");
-    expected_str.assign("D\tDarel\nE\tElina\nC\tChris\nB\tBruce\n");
-    EXPECT_EQ(lru_cache.dump(), expected_str);
+    // lru_cache.put("D", "Darel");
+    // expected_str.assign("D\tDarel\nE\tElina\nC\tChris\nB\tBruce\n");
+    // EXPECT_EQ(lru_cache.dump(), expected_str);
 
-    lru_cache.put("F", "Frank");
-    expected_str.assign("F\tFrank\nD\tDarel\nE\tElina\nC\tChris\n");
-    EXPECT_EQ(lru_cache.dump(), expected_str);
+    // lru_cache.put("F", "Frank");
+    // expected_str.assign("F\tFrank\nD\tDarel\nE\tElina\nC\tChris\n");
+    // EXPECT_EQ(lru_cache.dump(), expected_str);
 
-    std::string s;
-    auto get_ok = lru_cache.get("D", &s);
-    EXPECT_TRUE(get_ok);
-    EXPECT_EQ(s, "Darel");
-    expected_str.assign("D\tDarel\nF\tFrank\nE\tElina\nC\tChris\n");
-    EXPECT_EQ(lru_cache.dump(), expected_str);
+    // std::string s;
+    // auto get_ok = lru_cache.get("D", &s);
+    // EXPECT_TRUE(get_ok);
+    // EXPECT_EQ(s, "Darel");
+    // expected_str.assign("D\tDarel\nF\tFrank\nE\tElina\nC\tChris\n");
+    // EXPECT_EQ(lru_cache.dump(), expected_str);
 
-    get_ok = lru_cache.get("G", &s);
-    EXPECT_TRUE(!get_ok);
+    // get_ok = lru_cache.get("G", &s);
+    // EXPECT_TRUE(!get_ok);
+// }
+
+// int main(int argc, char** argv) {
+    // testing::InitGoogleTest(&argc, argv);
+    // return RUN_ALL_TESTS();
+// }
+
+void test(const int n) {
+    struct timeval start_tv, end_tv;
+    gettimeofday(&start_tv, NULL);
+
+    LRUCache<int, int> lru_cache(n);
+    //put
+    for (int i = 0; i < n; ++i) {
+        lru_cache.put(i, i);
+    }
+    int value = -1;
+    //get
+    for (int i = 0; i < n; ++i) {
+        lru_cache.get(i, &value);
+    }
+    //put
+    for (int i = n; i < 2*n; ++i) {
+        lru_cache.put(i, i);
+    }
+
+    gettimeofday(&end_tv, NULL);
+
+    std::cout << "n:" << n << "\ttime:" << (end_tv.tv_sec - start_tv.tv_sec) * 1000000.0 + (end_tv.tv_usec - start_tv.tv_usec) << std::endl;
 }
 
-int main(int argc, char** argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+int main() {
+    test(100000);
+    test(1000000);
+    test(10000000);
 
     return 0;
 }
-
 /* vim: set ts=4 sw=4 sts=4 tw=100 */
