@@ -1,0 +1,29 @@
+package echo;
+
+option cc_generic_services = true;
+
+message EchoRequest {
+    required string msg = 1;
+}
+
+message EchoResponse {
+    required string msg = 2;
+}
+
+service EchoService {
+    rpc Echo(EchoRequest) returns (EchoResponse);
+}
+
+message A {
+    optional int32 a = 1;
+    repeated int32 urls = 2;
+    optional int32 id = 3;
+}
+message B {
+    optional int32 b = 1;
+    message HeHeB {
+        repeated int32 urls = 1;
+    }
+    optional HeHeB hehe_a = 2;
+    optional string what = 3;
+}
