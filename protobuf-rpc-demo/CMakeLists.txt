@@ -2,17 +2,18 @@ PROJECT(protobuf-rpc-demp)
 cmake_minimum_required(VERSION 3.2)
 add_compile_options(-std=c++11)
 
-INCLUDE_DIRECTORIES(
+include_directories(
     ./src
     ../../../../bc_out/third-64/protobuf/output/include
     ../../../../bc_out/third-64/boost/output/include)
-LINK_DIRECTORIES(../../../../bc_out/third-64/protobuf/output/lib)
-LINK_DIRECTORIES(../../../../bc_out/third-64/boost/output/lib)
-LINK_DIRECTORIES(./build)
+link_directories(
+    ../../../../bc_out/third-64/protobuf/output/lib
+    ../../../../bc_out/third-64/boost/output/lib
+    ./build)
 
-SET(LIBMYRPC_SRC ./src/rpc_meta.pb.cc)
-ADD_LIBRARY(myrpc STATIC ${LIBMYRPC_SRC})
-ADD_EXECUTABLE(server ./src/echo.pb.cc ./src/test_myrpc.cpp)
-TARGET_LINK_LIBRARIES(server libprotobuf.a libboost_signals.a libboost_system.a libmyrpc.a)
-ADD_EXECUTABLE(client ./src/echo.pb.cc ./src/test_myrpc_client.cpp)
-TARGET_LINK_LIBRARIES(client libprotobuf.a libboost_signals.a libboost_system.a libmyrpc.a)
+set(LIBMYRPC_SRC ./src/rpc_meta.pb.cc)
+add_library(myrpc ${LIBMYRPC_SRC})
+add_executable(server ./src/echo.pb.cc ./src/test_myrpc.cpp)
+target_link_libraries(server libprotobuf.a libboost_signals.a libboost_system.a myrpc)
+add_executable(client ./src/echo.pb.cc ./src/test_myrpc_client.cpp)
+target_link_libraries(client libprotobuf.a libboost_signals.a libboost_system.a myrpc)
