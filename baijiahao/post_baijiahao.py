@@ -12,8 +12,8 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 # article
-ORIGIN_MARKDOWN = '2019-01-19-wsw-reading.markdown'
-COVER_IMAGE = 'https://izualzhy.cn/assets/images/wsw-reading.jpg'
+ORIGIN_MARKDOWN = '2019-01-27-leveldb-table.markdown'
+COVER_IMAGE = 'https://izualzhy.cn/assets/images/leveldb/table.cc.png'
 
 #  API
 HOST = 'https://izualzhy.cn/'
@@ -47,7 +47,7 @@ def generate_contents(original_url):
     html = markdown2.markdown_path(ORIGIN_MARKDOWN, extras=['fenced-code-blocks'])
     html = html.replace('/assets/images', HOST + 'assets/images')
 
-    ORIGINAL_WARNING = '由于百家号对代码排版较差，而且在富文本中丢格式，可以直接查看网站原文:' % original_url
+    ORIGINAL_WARNING = '由于百家号对代码排版较差，而且在富文本中丢格式，可以直接查看网站原文:' + original_url
     content = HTML_HEADER + ORIGINAL_WARNING + html + HTML_TAILOR
     with open('post_baijiahao.html', 'w') as f:
         f.write(content)
