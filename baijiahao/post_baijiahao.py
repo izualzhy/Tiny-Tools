@@ -12,15 +12,15 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 # article
-ORIGIN_MARKDOWN = '2019-01-27-leveldb-table.markdown'
-COVER_IMAGE = 'https://izualzhy.cn/assets/images/leveldb/table.cc.png'
+ORIGIN_MARKDOWN = '2018-12-30-xcz-reading.markdown'
+COVER_IMAGE = 'https://izualzhy.cn/assets/images/xincanzhe.png'
 
 #  API
 HOST = 'https://izualzhy.cn/'
 PUBLISH_API = 'http://baijiahao.baidu.com/builderinner/open/resource/article/publish'
 #  配置APP_ID APP_TOKEN，从开发者页面(https://baijiahao.baidu.com/builder/rc/develop)获取
 APP_ID = '1598771538853672'
-APP_TOKEN = ''
+APP_TOKEN = 'e42b80660f35109f3632c33aec15c670'
 
 
 #  从原始markdown文件获取title

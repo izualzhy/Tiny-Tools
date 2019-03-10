@@ -1,19 +1,3 @@
-/***************************************************************************
- * 
- * Copyright (c) 2018 Baidu.com, Inc. All Rights Reserved
- * $Id$ 
- * 
- **************************************************************************/
- 
- /**
- * @file bd_test/protobuf_test/src/myrpc.cpp
- * @author zhangying21(zhangying21@baidu.com)
- * @date 2018/03/25 15:51:19
- * @version $Revision$ 
- * @brief 
- *  
- **/
-
 #include <iostream>
 #include "rpc_meta.pb.h"
 #include "google/protobuf/service.h"

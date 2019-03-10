@@ -1,19 +1,3 @@
-/***************************************************************************
- * 
- * Copyright (c) 2018 Baidu.com, Inc. All Rights Reserved
- * $Id$ 
- * 
- **************************************************************************/
- 
- /**
- * @file bd_test/protobuf_test/src/test_myrpc_client.cpp
- * @author zhangying21(zhangying21@baidu.com)
- * @date 2018/03/25 21:40:14
- * @version $Revision$ 
- * @brief 
- *  
- **/
-
 #include <iostream>
 #include "echo.pb.h"
 #include "myrpc.h"
